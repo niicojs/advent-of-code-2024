@@ -15,7 +15,7 @@ consola.log(lines);
 const answer = 0;
 
 
-consola.warn('result', answer);
+consola.success('result', answer);
 consola.success('Elapsed:', formatElapsedTime(begin - new Date().getTime()));
 // await submit({ day, level: 1, answer: answer });
 consola.success('Done.');
