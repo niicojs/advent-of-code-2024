@@ -37,7 +37,7 @@ function safe(report, strict = false) {
           safe(report.slice(0, i).concat(report.slice(i + 1)), true)
         );
   }
-  
+
   return true;
 }
 
@@ -50,5 +50,5 @@ for (let i = 0; i < reports.length; i++) {
 
 consola.success('result', answer);
 consola.success('Elapsed:', formatElapsedTime(begin - new Date().getTime()));
-// await submit({ day, level: 2, answer: answer });
+await submit({ day, level: 2, answer });
 consola.success('Done.');
