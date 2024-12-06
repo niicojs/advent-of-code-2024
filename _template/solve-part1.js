@@ -12,7 +12,7 @@ const begin = new Date().getTime();
 const lines = getDataLines(day);
 consola.log(lines);
 
-const answer = 0;
+let answer = 0;
 
 
 consola.success('result', answer);
