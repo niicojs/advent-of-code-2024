@@ -15,13 +15,6 @@ const day = getCurrentDay();
 consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
-const turn = {
-  '0,-1': [1, 0],
-  '1,0': [0, 1],
-  '0,1': [-1, 0],
-  '-1,0': [0, -1],
-};
-
 let start = [0, 0];
 
 const grid = getGrid(getDataLines(day));
@@ -29,8 +22,7 @@ for (const { x, y, cell } of enumGrid(grid)) {
   if (cell === '^') start = [x, y];
 }
 
-const key = (x, y) => `${x},${y}`;
-const key2 = (pos, dir) => `${pos[0]},${pos[1]},${dir[0]},${dir[1]}`;
+const key = (pos, dir) => `${pos[0]},${pos[1]},${dir[0]},${dir[1]}`;
 
 function gogogo(guard, dir) {
   const done = new Set();
@@ -38,12 +30,12 @@ function gogogo(guard, dir) {
     let [nx, ny] = [guard[0] + dir[0], guard[1] + dir[1]];
     if (!inGridRange(grid, nx, ny)) return 'OUT';
     while (grid[ny][nx] === '#') {
-      dir = turn[key(dir[0], dir[1])];
+      dir = [-dir[1], dir[0]];
       [nx, ny] = [guard[0] + dir[0], guard[1] + dir[1]];
     }
     guard = [nx, ny];
-    if (done.has(key2(guard, dir))) return 'LOOP';
-    done.add(key2(guard, dir));
+    if (done.has(key(guard, dir))) return 'LOOP';
+    done.add(key(guard, dir));
   }
 }
 

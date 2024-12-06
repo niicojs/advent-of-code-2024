@@ -19,11 +19,16 @@ export function getCurrentDay() {
  * @returns string
  */
 export function getRawData(day) {
-  let file = [
-    path.join(path.dirname(process.argv[1]), './input.txt'),
-    path.join(path.dirname(process.argv[1]), day + '.txt'),
-    path.join('./inputs', day + '.txt'),
-  ].find((p) => existsSync(p));
+  let filename = './input.txt';
+  if (process.argv.length > 2) {
+    if (
+      existsSync(
+        path.join(path.dirname(process.argv[1]), process.argv[2] + '.txt')
+      )
+    )
+      filename = process.argv[2] + '.txt';
+  }
+  let file = path.join(path.dirname(process.argv[1]), filename);
 
   return readFileSync(file, 'utf8');
 }
