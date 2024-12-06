@@ -67,8 +67,22 @@ export async function submit({ year, day, level, answer }) {
     consola.success('Bonne réponse !');
     return true;
   }
-  
+
   consola.warn('Impossible de comprendre la réponse du serveur :');
   consola.warn(response);
   return false;
+}
+
+export async function getData({ year, day }) {
+  if (!year) {
+    if (process.env.AOC_YEAR) year = +process.env.AOC_YEAR;
+    else year = new Date().getFullYear();
+  }
+  const url = `https://adventofcode.com/${year}/day/${+day}/input`;
+  const res = await fetch(url, {
+    headers: { cookie: `session=${process.env.AOC_SESSION_KEY}` },
+    method: 'GET',
+  });
+  const response = await res.text();
+  writeFileSync(`./${day}/real.txt`, response, 'utf-8');
 }
