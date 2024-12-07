@@ -1,6 +1,5 @@
 import { consola } from 'consola';
 import { formatElapsedTime, getCurrentDay, getDataLines } from '../utils.js';
-import { submit } from '../aoc.js';
 
 consola.wrapAll();
 
@@ -11,23 +10,17 @@ const begin = new Date().getTime();
 
 const lines = getDataLines(day);
 
-function calculate(t, nums) {
-  const todo = [{ val: nums[0], idx: 1 }];
-  const max = nums.length - 1;
-  while (todo.length > 0) {
-    const { val, idx } = todo.shift();
-    if (val > t) continue;
-
-    const v = [val * nums[idx], val + nums[idx], +(val + '' + nums[idx])];
-    if (idx === max) {
-      if (v[0] === t) return true;
-      if (v[1] === t) return true;
-      if (v[2] === t) return true;
-    } else {
-      if (v[0] <= t) todo.push({ val: v[0], idx: idx + 1 });
-      if (v[1] <= t) todo.push({ val: v[1], idx: idx + 1 });
-      if (v[2] <= t) todo.push({ val: v[2], idx: idx + 1 });
-    }
+function calculate(target, nums) {
+  const left = nums.slice(0, -1);
+  const last = nums.at(-1);
+  if (nums.length === 1) return last === target;
+  if (target % last === 0 && calculate(target / last, left)) return true;
+  if (target > last && calculate(target - last, left)) return true;
+  const tstr = target.toString();
+  const numstr = last.toString();
+  if (tstr.endsWith(numstr)) {
+    const rem = tstr.slice(0, tstr.length - numstr.length);
+    return calculate(+rem, left);
   }
   return false;
 }
@@ -35,16 +28,14 @@ function calculate(t, nums) {
 let answer = 0;
 
 for (let i = 0; i < lines.length; i++) {
-  const [a, b] = lines[i].split(':');
+  const [a, b] = lines[i].split(': ');
   const target = +a;
-  const possible = b.split(' ').filter(Boolean).map(Number);
+  const possible = b.split(' ').map(Number);
   if (calculate(target, possible)) {
     answer += target;
   }
-  if (i % 4 === 0) consola.log(((i / lines.length) * 100).toFixed(2) + '%');
 }
 
-consola.success('result', answer, answer === 189207836795655);
+consola.success('result', answer);
 consola.success('Elapsed:', formatElapsedTime(begin - new Date().getTime()));
-// await submit({ day, level: 1, answer: answer });
 consola.success('Done.');
