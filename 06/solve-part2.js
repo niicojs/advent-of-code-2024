@@ -6,6 +6,7 @@ import {
   getDataLines,
   getGrid,
   inGridRange,
+  inPath,
 } from '../utils.js';
 
 consola.wrapAll();
@@ -24,27 +25,41 @@ for (const { x, y, cell } of enumGrid(grid)) {
 
 const key = (pos, dir) => `${pos[0]},${pos[1]},${dir[0]},${dir[1]}`;
 
-function gogogo(guard, dir) {
-  const done = new Set();
+function findpath(guard, dir) {
+  const path = [];
   while (true) {
     let [nx, ny] = [guard[0] + dir[0], guard[1] + dir[1]];
-    if (!inGridRange(grid, nx, ny)) return 'OUT';
+    if (!inGridRange(grid, nx, ny)) return path;
     while (grid[ny][nx] === '#') {
       dir = [-dir[1], dir[0]];
       [nx, ny] = [guard[0] + dir[0], guard[1] + dir[1]];
     }
     guard = [nx, ny];
-    if (done.has(key(guard, dir))) return 'LOOP';
-    done.add(key(guard, dir));
+    if (!inPath(path, guard)) path.push(guard);
+  }
+}
+
+function gogogo(guard, dir) {
+  const done = new Set();
+  while (true) {
+    let [nx, ny] = [guard[0] + dir[0], guard[1] + dir[1]];
+    if (!inGridRange(grid, nx, ny)) return 'OUT';
+    if (grid[ny][nx] === '#') {
+      if (done.has(key([nx, ny], dir))) return 'LOOP';
+      done.add(key([nx, ny], dir));
+    }
+    while (grid[ny][nx] === '#') {
+      dir = [-dir[1], dir[0]];
+      [nx, ny] = [guard[0] + dir[0], guard[1] + dir[1]];
+    }
+    guard = [nx, ny];
   }
 }
 
 let answer = 0;
 
-for (const { x, y, cell } of enumGrid(grid)) {
-  if (cell === '^') continue;
-  if (cell === '#') continue;
-
+const path = findpath(start, [0, -1]);
+for (const [x, y] of path) {
   grid[y][x] = '#';
 
   let res = gogogo(start, [0, -1]);
