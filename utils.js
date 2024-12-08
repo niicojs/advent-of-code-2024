@@ -240,3 +240,12 @@ export function mergeRanges(ranges) {
   }
   return merged;
 }
+
+export function zip(...arr) {
+  const length = Math.max(...arr.map((a) => a.length));
+  return arr.length
+    ? Array(length)
+        .fill(0)
+        .map((_, i) => arr.map((row) => row[i]))
+    : [];
+}

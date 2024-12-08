@@ -19,7 +19,7 @@ function calculate(target, nums) {
   const tstr = target.toString();
   const numstr = last.toString();
   if (tstr.endsWith(numstr)) {
-    const rem = tstr.slice(0, tstr.length - numstr.length);
+    const rem = tstr.slice(0, -numstr.length);
     return calculate(+rem, left);
   }
   return false;

@@ -9,8 +9,8 @@
   },
   "dependencies": {
     "consola": "^3.2.3",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.4.7",
     "heap": "^0.2.7",
-    "remeda": "^2.17.3"
+    "remeda": "^2.17.4"
   }
 }
