@@ -27,11 +27,10 @@ for (const { x, y, cell } of enumGrid(grid)) {
 const key = (x, y) => `${x},${y}`;
 
 function findTrails(start) {
-  const todo = [[start]];
+  const todo = [start];
   let end = [];
   while (todo.length) {
-    const path = todo.shift();
-    const [x, y] = path.at(-1);
+    const [x, y] = todo.shift();
     if (grid[y][x] === '9') {
       end[key(x, y)] = (end[key(x, y)] || 0) + 1;
       continue;
@@ -42,12 +41,10 @@ function findTrails(start) {
         ([nx, ny]) =>
           inGridRange(grid, nx, ny) && +grid[ny][nx] === +grid[y][x] + 1
       );
-    todo.push(...possible.map((p) => [...path, p]));
+    todo.push(...possible);
   }
   return sum(Object.values(end))
 }
-
-consola.log(zeros);
 
 let answer = 0;
 for (const z of zeros) {
