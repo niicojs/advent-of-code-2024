@@ -20,6 +20,9 @@ importers:
       remeda:
         specifier: ^2.17.4
         version: 2.17.4
+      tinyqueue:
+        specifier: ^3.0.0
+        version: 3.0.0
 
 packages:
 
@@ -37,6 +40,9 @@ packages:
   remeda@2.17.4:
     resolution: {integrity: sha512-pviU2Ag7Qx9mOCAKO4voxDx/scfLzdhp3v85qDO4xxntQsU76uE9sgrAAdK1ATn4zzaOJqCXYMMNRP+O9F4Wiw==}
 
+  tinyqueue@3.0.0:
+    resolution: {integrity: sha512-gRa9gwYU3ECmQYv3lslts5hxuIa90veaEcxDYuu3QGOIAEM2mOZkVHp48ANJuu1CURtRdHKUBY5Lm1tHV+sD4g==}
+
   type-fest@4.30.0:
     resolution: {integrity: sha512-G6zXWS1dLj6eagy6sVhOMQiLtJdxQBHIA9Z6HFUNLOlr6MFOgzV8wvmidtPONfPtEUv0uZsy77XJNzTAfwPDaA==}
     engines: {node: '>=16'}
@@ -52,5 +58,7 @@ snapshots:
   remeda@2.17.4:
     dependencies:
       type-fest: 4.30.0
+
+  tinyqueue@3.0.0: {}
 
   type-fest@4.30.0: {}

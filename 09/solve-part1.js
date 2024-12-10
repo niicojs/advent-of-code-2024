@@ -1,6 +1,6 @@
 import { consola } from 'consola';
+import TinyQueue from 'tinyqueue';
 import { formatElapsedTime, getCurrentDay, getRawData } from '../utils.js';
-import Heap from 'heap';
 
 consola.wrapAll();
 
@@ -11,7 +11,7 @@ const begin = new Date().getTime();
 
 const raw = getRawData(day).split('').map(Number);
 
-const data = new Heap((a, b) => b.idx - a.idx);
+const data = new TinyQueue([], (a, b) => b.idx - a.idx);
 const free = [];
 
 let idx = 0;
@@ -45,8 +45,8 @@ while (free.length > 0) {
 }
 
 let answer = 0;
-const result = data.toArray();
-for (const d of result) {
+while (data.length > 0) {
+  const d = data.pop();
   for (let i = 0; i < d.size; i++) {
     answer += (d.idx + i) * d.id;
   }
