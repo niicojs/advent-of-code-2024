@@ -14,8 +14,9 @@ consola.log(lines);
 
 let answer = 0;
 
-
 consola.success('result', answer);
 consola.success('Elapsed:', formatElapsedTime(begin - new Date().getTime()));
-// await submit({ day, level: 1, answer: answer });
+if (process.argv[2] === 'real') {
+  await submit({ day, level: 1, answer: answer });
+}
 consola.success('Done.');
