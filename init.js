@@ -1,5 +1,11 @@
 import 'dotenv/config';
-import { copyFileSync, readFileSync, writeFileSync } from 'fs';
+import {
+  copyFileSync,
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  writeFileSync,
+} from 'fs';
 import { consola } from 'consola';
 import { getData } from './aoc.js';
 
@@ -15,6 +21,11 @@ if (arg === 'part2') {
   writeFileSync(`./${day}/solve-part2.js`, content, 'utf8');
 } else {
   consola.start("récupération de l'input pour le jour", day);
+  if (!existsSync(`./${day}`)) {
+    mkdirSync(`./${day}`);
+    copyFileSync(`./_template/solve-part1.js`, `./${day}/solve-part1.js`);
+    copyFileSync(`./_template/input.txt`, `./${day}/input.txt`);
+  }
   getData({ day });
 }
 

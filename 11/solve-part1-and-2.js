@@ -15,8 +15,6 @@ for (let i = 0; i < numbers.length; i++) {
   map[numbers[i]] = 1 + (map[numbers[i]] || 0);
 }
 
-consola.log(map);
-
 function blink(data) {
   const result = {};
   for (const str in data) {
