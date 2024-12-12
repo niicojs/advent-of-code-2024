@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "init": "node init.js",
+    "init part1": "node init.js",
     "init part2": "node init.js part2"
   },
   "dependencies": {

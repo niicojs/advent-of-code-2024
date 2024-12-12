@@ -19,6 +19,7 @@ if (arg === 'part2') {
   let content = readFileSync(`./${day}/solve-part1.js`, 'utf8');
   content = content.replace(submit1, submit2);
   writeFileSync(`./${day}/solve-part2.js`, content, 'utf8');
+  if (!existsSync(`./${day}/real.txt`)) getData({ day });
 } else {
   consola.start("récupération de l'input pour le jour", day);
   if (!existsSync(`./${day}`)) {

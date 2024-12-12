@@ -131,6 +131,16 @@ export const diagNeighbors = [
 ];
 export const neighbors = [...diagNeighbors, ...directNeighbors];
 
+/**
+ * Returns all direct neighbors of (x, y)
+ * @param {number} x
+ * @param {number} y
+ * @returns {[number, number][]}
+ */
+export function getDirectNeighbors(x, y) {
+  return directNeighbors.map(([dx, dy]) => [x + dx, y + dy]);
+}
+
 export function chunk(arr, len) {
   arr = [...arr];
   return [...Array(Math.ceil(arr.length / len))].map((_, i) =>
