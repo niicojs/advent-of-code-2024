@@ -23,8 +23,14 @@ importers:
       tinyqueue:
         specifier: ^3.0.0
         version: 3.0.0
+      z3-solver:
+        specifier: ^4.13.3
+        version: 4.13.3
 
 packages:
+
+  async-mutex@0.3.2:
+    resolution: {integrity: sha512-HuTK7E7MT7jZEh1P9GtRW9+aTWiDWWi9InbZ5hjxrnRa39KS4BW04+xLBhYNS2aXhHUIKZSw3gj4Pn1pj+qGAA==}
 
   consola@3.2.3:
     resolution: {integrity: sha512-I5qxpzLv+sJhTVEoLYNcTW+bThDCPsit0vLNKShZx6rLtpilNpmmeTPaeqJb9ZE9dV3DGaeby6Vuhrw38WjeyQ==}
@@ -43,11 +49,22 @@ packages:
   tinyqueue@3.0.0:
     resolution: {integrity: sha512-gRa9gwYU3ECmQYv3lslts5hxuIa90veaEcxDYuu3QGOIAEM2mOZkVHp48ANJuu1CURtRdHKUBY5Lm1tHV+sD4g==}
 
+  tslib@2.8.1:
+    resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
+
   type-fest@4.30.0:
     resolution: {integrity: sha512-G6zXWS1dLj6eagy6sVhOMQiLtJdxQBHIA9Z6HFUNLOlr6MFOgzV8wvmidtPONfPtEUv0uZsy77XJNzTAfwPDaA==}
     engines: {node: '>=16'}
 
+  z3-solver@4.13.3:
+    resolution: {integrity: sha512-890HgEb0Tr+J3vtYW/PWkxsptCUfYSJQtpfWDt8Sd9KVmjI5woZJd9d6lvuWi4wB1CWzzCfJ7SqQjxMawBazZQ==}
+    engines: {node: '>=16'}
+
 snapshots:
+
+  async-mutex@0.3.2:
+    dependencies:
+      tslib: 2.8.1
 
   consola@3.2.3: {}
 
@@ -61,4 +78,10 @@ snapshots:
 
   tinyqueue@3.0.0: {}
 
+  tslib@2.8.1: {}
+
   type-fest@4.30.0: {}
+
+  z3-solver@4.13.3:
+    dependencies:
+      async-mutex: 0.3.2
