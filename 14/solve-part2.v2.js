@@ -67,19 +67,20 @@ function print() {
 }
 
 let minsafe = Infinity;
+let best = 0;
 let i = 0;
-while (true) {
+while (i <= wide * tall) {
   const safe = product(split());
   if (safe < minsafe) {
     minsafe = safe;
     print();
-    consola.log(i);
+    best = i;
   }
   i++;
   move(1);
 }
 
-let answer = 0;
+let answer = best;
 
 consola.success('result', answer);
 consola.success('Elapsed:', formatElapsedTime(begin - new Date().getTime()));

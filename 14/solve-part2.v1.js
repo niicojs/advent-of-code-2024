@@ -40,15 +40,9 @@ function move(time) {
   }
 }
 
-let mincheck = Infinity;
 function check(i) {
   const first = robots.at(0);
-  const m = mean(robots.slice(1).map((robot) => dist(first.pos, robot.pos)));
-  if (m < mincheck) {
-    mincheck = m;
-    consola.log(i);
-    print();
-  }
+  return mean(robots.slice(1).map((robot) => dist(first.pos, robot.pos)));
 }
 
 function print() {
@@ -64,12 +58,20 @@ function print() {
 }
 
 let i = 0;
-while (true) {
-  check(i++);
+let mincheck = Infinity;
+let best = 0;
+while (i <= wide * tall) {
+  const c = check(i);
+  if (c < mincheck) {
+    mincheck = c;
+    best = i;
+    print();
+  }
+  i++;
   move(1);
 }
 
-let answer = 0;
+let answer = best;
 
 consola.success('result', answer);
 consola.success('Elapsed:', formatElapsedTime(begin - new Date().getTime()));
