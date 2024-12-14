@@ -27,3 +27,8 @@
 | 23  |  |
 | 24  |  |
 | 25  |  |
+
+Useful tools
+ - https://mathsolver.microsoft.com/
+ - https://numpy.org/doc/2.1/reference/generated/numpy.linalg.solve.html#numpy.linalg.solve
+ 

@@ -259,3 +259,5 @@ export function zip(...arr) {
         .map((_, i) => arr.map((row) => row[i]))
     : [];
 }
+
+const mod = (x, n) => ((x % n) + n) % n;
