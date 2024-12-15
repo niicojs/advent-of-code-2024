@@ -30,21 +30,6 @@ for (const [x, y, dx, dy] of lines) {
   robots.push({ pos: [x, y], speed: [dx, dy] });
 }
 
-const mod = (x, n) => ((x % n) + n) % n;
-
-function move(time) {
-  for (const robot of robots) {
-    const [x, y] = robot.pos;
-    const [dx, dy] = robot.speed;
-    robot.pos = [mod(x + dx * time, wide), mod(y + dy * time, tall)];
-  }
-}
-
-function check(i) {
-  const first = robots.at(0);
-  return mean(robots.slice(1).map((robot) => dist(first.pos, robot.pos)));
-}
-
 function print() {
   const grid = Array(tall)
     .fill(0)
@@ -55,6 +40,21 @@ function print() {
     grid[y][x] = '#';
   }
   printGrid(grid);
+}
+
+const mod = (x, n) => ((x % n) + n) % n;
+
+function move(time = 1) {
+  for (const robot of robots) {
+    const [x, y] = robot.pos;
+    const [dx, dy] = robot.speed;
+    robot.pos = [mod(x + dx * time, wide), mod(y + dy * time, tall)];
+  }
+}
+
+function check(i) {
+  const first = robots.at(0);
+  return mean(robots.slice(1).map((robot) => dist(first.pos, robot.pos)));
 }
 
 let i = 0;
@@ -68,7 +68,7 @@ while (i <= wide * tall) {
     print();
   }
   i++;
-  move(1);
+  move();
 }
 
 let answer = best;

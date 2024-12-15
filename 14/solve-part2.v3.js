@@ -4,7 +4,6 @@ import {
   getCurrentDay,
   getDataLines,
   printGrid,
-  product,
 } from '../utils.js';
 import { submit } from '../aoc.js';
 
@@ -31,24 +30,12 @@ for (const [x, y, dx, dy] of lines) {
 
 const mod = (x, n) => ((x % n) + n) % n;
 
-function move(time) {
+function move(time = 1) {
   for (const robot of robots) {
     const [x, y] = robot.pos;
     const [dx, dy] = robot.speed;
     robot.pos = [mod(x + dx * time, wide), mod(y + dy * time, tall)];
   }
-}
-
-function print() {
-  const grid = Array(tall)
-    .fill(0)
-    .map((_) => Array(wide).fill('.'));
-
-  for (const robot of robots) {
-    const [x, y] = robot.pos;
-    grid[y][x] = '#';
-  }
-  printGrid(grid);
 }
 
 const overlap = () => {
@@ -59,7 +46,7 @@ const overlap = () => {
 
 let answer = 0;
 do {
-  move(1);
+  move();
   answer++;
 } while (overlap());
 

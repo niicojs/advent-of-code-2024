@@ -31,7 +31,7 @@ for (const [x, y, dx, dy] of lines) {
 
 const mod = (x, n) => ((x % n) + n) % n;
 
-function move(time) {
+function move(time = 1) {
   for (const robot of robots) {
     const [x, y] = robot.pos;
     const [dx, dy] = robot.speed;
@@ -77,7 +77,7 @@ while (i <= wide * tall) {
     best = i;
   }
   i++;
-  move(1);
+  move();
 }
 
 let answer = best;
