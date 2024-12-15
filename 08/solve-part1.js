@@ -20,7 +20,7 @@ const key = (x, y) => `${x},${y}`;
 const antennas = {};
 const antinodes = new Set();
 
-const grid = getGrid(getDataLines(day));
+const grid = getGrid(getDataLines());
 for (const { x, y, cell } of enumGrid(grid)) {
   if (cell === '.') continue;
   if (!antennas[cell]) antennas[cell] = [];

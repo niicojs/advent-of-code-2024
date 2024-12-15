@@ -27,7 +27,7 @@ let guard = [0, 0];
 let dir = [0, -1];
 let history = new Set();
 
-const grid = getGrid(getDataLines(day));
+const grid = getGrid(getDataLines());
 for (const { x, y, cell } of enumGrid(grid)) {
   if (cell === '^') guard = [x, y];
 }

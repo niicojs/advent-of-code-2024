@@ -15,7 +15,7 @@ consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
 let answer = 0;
-const grid = getGrid(getDataLines(day));
+const grid = getGrid(getDataLines());
 
 const map = { M: 'S', S: 'M' };
 function findcross(x, y) {

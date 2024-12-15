@@ -18,7 +18,7 @@ const day = getCurrentDay();
 consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
-const grid = getGrid(getDataLines(day));
+const grid = getGrid(getDataLines());
 
 const key = (x, y) => `${x},${y}`;
 const key2 = (x, y, dx, dy) => `${x},${y},${dx},${dy}`;

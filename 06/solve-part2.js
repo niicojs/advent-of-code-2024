@@ -18,7 +18,7 @@ const begin = new Date().getTime();
 
 let start = [0, 0];
 
-const grid = getGrid(getDataLines(day));
+const grid = getGrid(getDataLines());
 for (const { x, y, cell } of enumGrid(grid)) {
   if (cell === '^') start = [x, y];
 }

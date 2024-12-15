@@ -10,7 +10,7 @@ const day = getCurrentDay();
 consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
-const lines = getDataLines(day).map((l) => l.split(': ')[1].split(', '));
+const lines = getDataLines().map((l) => l.split(': ')[1].split(', '));
 
 const { Context } = await Z3.init();
 const { Solver, Int } = new Context('main');

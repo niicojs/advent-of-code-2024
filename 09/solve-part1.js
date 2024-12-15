@@ -9,7 +9,7 @@ const day = getCurrentDay();
 consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
-const raw = getRawData(day).split('').map(Number);
+const raw = getRawData().split('').map(Number);
 
 const data = new TinyQueue([], (a, b) => b.idx - a.idx);
 const free = [];

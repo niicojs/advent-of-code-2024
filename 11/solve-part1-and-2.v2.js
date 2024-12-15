@@ -14,7 +14,7 @@ const day = getCurrentDay();
 consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
-let numbers = getRawData(day).trim().split(/\s+/).map(Number);
+let numbers = getRawData().trim().split(/\s+/).map(Number);
 
 let answer = 0;
 

@@ -10,15 +10,14 @@ export function getCurrentDay() {
   if (!file.match(/^(\d+)/)) {
     file = path.parse(process.argv[1]).name;
   }
-  return file.match(/^(\d+)/)[0];
+  return file.match(/^(\d+)/)?.[0];
 }
 
 /**
  *
- * @param {string} day
  * @returns string
  */
-export function getRawData(day) {
+export function getRawData() {
   let filename = './input.txt';
   if (process.argv.length > 2) {
     if (
@@ -35,11 +34,11 @@ export function getRawData(day) {
 
 /**
  *
- * @param {string} day
+ * @param {boolean?} removeBlank
  * @returns string[]
  */
-export function getDataLines(day, removeBlank = true) {
-  const raw = getRawData(day);
+export function getDataLines(removeBlank = true) {
+  const raw = getRawData();
   let lines = raw.split(/\r?\n/);
   if (removeBlank) {
     lines = lines.filter(Boolean);
@@ -54,6 +53,16 @@ export function getDataLines(day, removeBlank = true) {
  */
 export function getGrid(lines) {
   return lines.map((l) => l.split(''));
+}
+
+/**
+ * Extracts all integer numbers from a given string and returns them as an array of numbers.
+ *
+ * @param {string} str - The input string containing numbers.
+ * @returns {number[]} - An array of numbers extracted from the string.
+ */
+export function nums(str) {
+  return str.match(/-?\d+/g).map(Number);
 }
 
 /**

@@ -8,7 +8,7 @@ const day = getCurrentDay();
 consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
-const raw = getRawData(day).split('').map(Number);
+const raw = getRawData().split('').map(Number);
 
 const data = [];
 const free = [];

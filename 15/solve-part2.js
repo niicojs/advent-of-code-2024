@@ -15,7 +15,7 @@ const day = getCurrentDay();
 consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
-const raw = getRawData(day);
+const raw = getRawData();
 const [one, two] = raw.split(/\r?\n\r?\n/);
 const grid = one
   .split(/\r?\n/)

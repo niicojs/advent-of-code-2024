@@ -23,7 +23,7 @@ if (process.argv[2] === 'real') {
 }
 
 const robots = [];
-const lines = getDataLines(day).map((l) => l.match(/(-?\d+)/g).map(Number));
+const lines = getDataLines().map((l) => l.match(/(-?\d+)/g).map(Number));
 
 for (const [x, y, dx, dy] of lines) {
   robots.push({ pos: [x, y], speed: [dx, dy] });

@@ -9,7 +9,7 @@ const day = getCurrentDay();
 consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
-let numbers = getRawData(day).trim().split(/\s+/);
+let numbers = getRawData().trim().split(/\s+/);
 let map = {};
 for (let i = 0; i < numbers.length; i++) {
   map[numbers[i]] = 1 + (map[numbers[i]] || 0);

@@ -8,7 +8,7 @@ const day = getCurrentDay();
 consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
-const lines = getDataLines(day, false);
+const lines = getDataLines(false);
 
 const cmpmap = {};
 let i = 0;

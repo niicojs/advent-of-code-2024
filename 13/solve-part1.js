@@ -14,7 +14,7 @@ const day = getCurrentDay();
 consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
-const lines = getDataLines(day).map((l) => l.split(': ')[1].split(', '));
+const lines = getDataLines().map((l) => l.split(': ')[1].split(', '));
 
 const find = memoize((target, a, b) => {
   if (target[0] === 0 && target[1] === 0) return 0;

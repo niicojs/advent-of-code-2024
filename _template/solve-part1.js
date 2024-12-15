@@ -1,6 +1,13 @@
 import { consola } from 'consola';
 import clipboard from 'clipboardy';
-import { formatElapsedTime, getCurrentDay, getDataLines } from '../utils.js';
+import {
+  formatElapsedTime,
+  getCurrentDay,
+  getDataLines,
+  getGrid,
+  getRawData,
+  nums,
+} from '../utils.js';
 import { submit } from '../aoc.js';
 
 consola.wrapAll();
@@ -10,8 +17,10 @@ const day = getCurrentDay();
 consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
-const lines = getDataLines(day);
-consola.log(lines);
+const raw = getRawData();
+const lines = getDataLines();
+const grid = getGrid(getDataLines());
+const values = getDataLines().map(nums);
 
 let answer = 0;
 

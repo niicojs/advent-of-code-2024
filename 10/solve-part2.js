@@ -17,7 +17,7 @@ const day = getCurrentDay();
 consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
-const grid = getGrid(getDataLines(day));
+const grid = getGrid(getDataLines());
 
 const zeros = [];
 for (const { x, y, cell } of enumGrid(grid)) {

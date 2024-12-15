@@ -8,7 +8,7 @@ const day = getCurrentDay();
 consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
-const lines = getDataLines(day);
+const lines = getDataLines();
 
 function calculate(t, numbers) {
   const todo = [{ val: numbers[0], nums: numbers.slice(1) }];

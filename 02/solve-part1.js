@@ -13,7 +13,7 @@ const day = getCurrentDay();
 consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
-const reports = getDataLines(day).map((l) => l.split(/\s+/).map(Number));
+const reports = getDataLines().map((l) => l.split(/\s+/).map(Number));
 
 function safe(report) {
   const incr = report.at(0) < report.at(1);
