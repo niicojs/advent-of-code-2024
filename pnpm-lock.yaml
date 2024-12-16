@@ -29,6 +29,9 @@ importers:
       tinyqueue:
         specifier: ^3.0.0
         version: 3.0.0
+      yoctocolors:
+        specifier: ^2.1.1
+        version: 2.1.1
       z3-solver:
         specifier: ^4.13.3
         version: 4.13.3
@@ -447,6 +450,10 @@ packages:
 
   yallist@4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
+
+  yoctocolors@2.1.1:
+    resolution: {integrity: sha512-GQHQqAopRhwU8Kt1DDM8NjibDXHC8eoh1erhGAJPEyveY9qqVeXvVikNKrDz69sHowPMorbPUrH/mx8c50eiBQ==}
+    engines: {node: '>=18'}
 
   z3-solver@4.13.3:
     resolution: {integrity: sha512-890HgEb0Tr+J3vtYW/PWkxsptCUfYSJQtpfWDt8Sd9KVmjI5woZJd9d6lvuWi4wB1CWzzCfJ7SqQjxMawBazZQ==}
@@ -874,6 +881,8 @@ snapshots:
   wrappy@1.0.2: {}
 
   yallist@4.0.0: {}
+
+  yoctocolors@2.1.1: {}
 
   z3-solver@4.13.3:
     dependencies:

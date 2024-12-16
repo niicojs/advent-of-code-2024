@@ -1,5 +1,7 @@
 import { consola } from 'consola';
 import clipboard from 'clipboardy';
+import TinyQueue from 'tinyqueue';
+import {} from 'yoctocolors';
 import {
   formatElapsedTime,
   getCurrentDay,
@@ -21,6 +23,22 @@ const raw = getRawData();
 const lines = getDataLines();
 const grid = getGrid(getDataLines());
 const values = getDataLines().map(nums);
+
+const key = (x, y) => `${x},${y}`;
+const key2 = (x, y, dx, dy) => `${x},${y},${dx},${dy}`;
+
+function search() {
+  const todo = new TinyQueue(
+    [{ pos: [0, 0], score: 0 }],
+    (a, b) => a.score - b.score
+  );
+  const visited = new Set();
+  while (todo.length > 0) {
+    const { pos: [x, y], score } = todo.pop();
+    if (visited.has(key(x, y))) continue;
+    visited.add(key(x, y));
+  }
+}
 
 let answer = 0;
 

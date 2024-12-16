@@ -269,4 +269,5 @@ export function zip(...arr) {
     : [];
 }
 
-const mod = (x, n) => ((x % n) + n) % n;
+export const mod = (x, n) => ((x % n) + n) % n;
+
