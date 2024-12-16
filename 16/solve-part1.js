@@ -57,7 +57,6 @@ function run() {
 
     todo.push({ score: score + 1000, pos: [x, y], dir: rotatel(dir) });
     todo.push({ score: score + 1000, pos: [x, y], dir: rotater(dir) });
-    todo.push({ score: score + 2000, pos: [x, y], dir: [-dir[0], -dir[1]] });
   }
   return Infinity;
 }

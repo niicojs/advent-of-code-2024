@@ -76,12 +76,6 @@ function findAllPaths() {
 
     todo.push({ score: score + 1000, pos: [x, y], dir: rotatel(dir), path });
     todo.push({ score: score + 1000, pos: [x, y], dir: rotater(dir), path });
-    todo.push({
-      score: score + 2000,
-      pos: [x, y],
-      dir: [-dir[0], -dir[1]],
-      path,
-    });
   }
   return bests;
 }
@@ -101,6 +95,7 @@ const printGrid = (grid, visited) => {
 };
 
 const possible = findAllPaths();
+// printGrid(grid, possible);
 let answer = possible.size;
 
 consola.success('result', answer);
