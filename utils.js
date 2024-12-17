@@ -269,5 +269,26 @@ export function zip(...arr) {
     : [];
 }
 
-export const mod = (x, n) => ((x % n) + n) % n;
+/**
+ * positive remainder
+ * @param {number} a first operand
+ * @param {number} b operand to divide by
+ * @returns {number} positive remainder
+ */
+export function mod(x, n) {
+  return ((x % n) + n) % n;
+}
 
+/**
+ * Solve two equations with two incognites.
+ *  a1 * x + b1 * y = c1
+ *  a2 * x + b2 * y = c2
+ * @param {number[]} a first equation [a1, b1, c1]
+ * @param {number[]} b second equation [a2, b2, c2]
+ * @returns {number[]} [x, y]
+ */
+export function solve2eq2inc([a1, b1, c1], [a2, b2, c2]) {
+  const x = (b2 * c1 - b1 * c2) / (b2 * a1 - b1 * a2);
+  const y = (c1 - a1 * x) / b1;
+  return [x, y];
+}

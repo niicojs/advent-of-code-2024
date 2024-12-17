@@ -19,7 +19,7 @@ const day = getCurrentDay();
 consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
-const raw = getRawData();
+const raw = getRawData().trim();
 const lines = getDataLines();
 const grid = getGrid(getDataLines());
 const values = getDataLines().map(nums);
