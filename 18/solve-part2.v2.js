@@ -1,6 +1,5 @@
 import { consola } from 'consola';
 import clipboard from 'clipboardy';
-import TinyQueue from 'tinyqueue';
 import {
   formatElapsedTime,
   getCurrentDay,
@@ -31,16 +30,11 @@ const blocks = (nb) => {
 
 function search(secs) {
   const walls = blocks(secs);
-  const todo = new TinyQueue(
-    [{ pos: [0, 0], score: 0 }],
-    (a, b) => a.score - b.score
-  );
+  const todo = [[0, 0]];
+
   const visited = new Set();
   while (todo.length > 0) {
-    const {
-      pos: [x, y],
-      score,
-    } = todo.pop();
+    const [x, y] = todo.shift();
 
     if (x === SIZE - 1 && y === SIZE - 1) return true;
 
@@ -53,21 +47,27 @@ function search(secs) {
     );
 
     for (const [nx, ny] of possible) {
-      todo.push({ pos: [nx, ny], score: score + 1 });
+      todo.push([nx, ny]);
     }
   }
   return false;
 }
 
-function dichotomy(min, max) {
-  if (min === max) return min;
-  const mid = Math.floor((min + max) / 2);
-  if (search(mid)) return dichotomy(mid + 1, max);
-  return dichotomy(min, mid);
+function binarysearch(min, max) {
+  let left = min;
+  let right = max;
+  while (left < right) {
+    const mid = Math.floor((left + right) / 2);
+    if (search(mid)) {
+      left = mid + 1;
+    } else {
+      right = mid;
+    }
+  }
+  return left;
 }
 
-let t = dichotomy(0, lines.length);
-
+let t = binarysearch(1024, lines.length);
 let answer = lines[t - 1].join(',');
 
 consola.success('result', answer);

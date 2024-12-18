@@ -17,9 +17,9 @@
 | 13  | ✅✅ |
 | 14  | ✅✅ |
 | 15  | ✅✅ |
-| 16  |  |
-| 17  |  |
-| 18  |  |
+| 16  | ✅✅ |
+| 17  | ✅✅ |
+| 18  | ✅✅ |
 | 19  |  |
 | 20  |  |
 | 21  |  |
@@ -30,5 +30,6 @@
 
 Useful tools
  - https://mathsolver.microsoft.com/
+ - https://www.npmjs.com/package/z3-solver
  - https://numpy.org/doc/2.1/reference/generated/numpy.linalg.solve.html#numpy.linalg.solve
  
