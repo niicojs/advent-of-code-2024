@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
+import { yellow } from 'yoctocolors';
 
 /**
  *
@@ -79,13 +80,14 @@ export function inGridRange(grid, x, y) {
 /**
  * @param {any[][]} grid
  */
-export const printGrid = (grid) => {
+export const printGrid = (grid, path = null) => {
   const pad = (grid.length - 1).toString().length;
   console.log(''.padStart(pad, ' ') + ' ┌' + '─'.repeat(grid[0].length) + '┐');
   for (let y = 0; y < grid.length; y++) {
     let line = y.toString().padStart(pad, ' ') + ' │';
     for (let x = 0; x < grid[y].length; x++) {
-      line += grid[y][x];
+      if (path && inPath(path, [x, y])) line += yellow('o');
+      else line += grid[y][x];
     }
     line += '│';
     console.log(line);
