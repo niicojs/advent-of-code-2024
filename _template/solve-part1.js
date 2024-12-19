@@ -1,13 +1,14 @@
 import { consola } from 'consola';
 import clipboard from 'clipboardy';
 import TinyQueue from 'tinyqueue';
-import {} from 'yoctocolors';
 import {
   formatElapsedTime,
   getCurrentDay,
   getDataLines,
+  getDirectNeighbors,
   getGrid,
   getRawData,
+  inGridRange,
   nums,
 } from '../utils.js';
 import { submit } from '../aoc.js';
@@ -34,9 +35,23 @@ function search() {
   );
   const visited = new Set();
   while (todo.length > 0) {
-    const { pos: [x, y], score } = todo.pop();
+    const {
+      pos: [x, y],
+      score,
+    } = todo.pop();
+
+    if (x === 0 && y === 0) return score;
+
     if (visited.has(key(x, y))) continue;
     visited.add(key(x, y));
+
+    const possible = getDirectNeighbors(x, y).filter(
+      ([nx, ny]) => inGridRange(grid, nx, ny) && grid[ny][nx] !== '#'
+    );
+
+    for (const [nx, ny] of possible) {
+      todo.push({ pos: [nx, ny], score: score + 1 });
+    }
   }
 }
 
