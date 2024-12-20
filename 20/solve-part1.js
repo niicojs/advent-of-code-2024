@@ -9,6 +9,7 @@ import {
   getDirectNeighbors,
   getGrid,
   inGridRange,
+  nums,
 } from '../utils.js';
 import { submit } from '../aoc.js';
 
@@ -33,50 +34,32 @@ for (const { x, y, cell } of enumGrid(grid)) {
   }
 }
 
-function search() {
-  const todo = new TinyQueue(
-    [{ score: 0, path: [start] }],
-    (a, b) => a.score - b.score
-  );
-  const visited = new Set();
-
-  while (todo.length > 0) {
-    const { score, path } = todo.pop();
-    let [x, y] = path.at(-1);
-
-    if (grid[y][x] === 'E') return path;
-
-    if (visited.has(key(x, y))) continue;
-    visited.add(key(x, y));
-
-    const possible = getDirectNeighbors(x, y).filter(
-      ([nx, ny]) => inGridRange(grid, nx, ny) && grid[ny][nx] !== '#'
+function initdists() {
+  let d = 0;
+  const dists = new Map([[key(...start), 0]]);
+  let last = [-1, -1];
+  let [x, y] = start;
+  while (grid[y][x] !== 'E') {
+    const neighbors = getDirectNeighbors(x, y).filter(
+      ([nx, ny]) =>
+        inGridRange(grid, nx, ny) &&
+        grid[ny][nx] !== '#' &&
+        (nx !== last[0] || ny !== last[1])
     );
-
-    for (const [nx, ny] of possible.filter(
-      ([nx, ny]) => grid[ny][nx] !== '#'
-    )) {
-      todo.push({
-        path: [...path, [nx, ny]],
-        score: score + 1,
-      });
-    }
+    last = [x, y];
+    [x, y] = neighbors[0];
+    dists.set(key(x, y), ++d);
   }
+  return dists;
 }
 
-let path = search();
-
-const nocheat = path.length - 1;
-
-const dist = new Map();
-for (let i = 0; i < path.length; i++) {
-  dist.set(key(...path[i]), nocheat - i);
-}
-consola.log('no cheat', nocheat);
+const dists = initdists();
 
 let answer = 0;
-for (const [x, y] of path) {
-  const real = dist.get(key(x, y));
+for (const k of dists.keys()) {
+  const [x, y] = nums(k);
+
+  const cheat = 2 + dists.get(key(x, y));
   const check = getDirectNeighbors(x, y).filter(
     ([nx, ny]) => inGridRange(grid, nx, ny) && grid[ny][nx] === '#'
   );
@@ -85,8 +68,8 @@ for (const [x, y] of path) {
       ([a, b]) => inGridRange(grid, a, b) && grid[b][a] !== '#'
     );
     for (const [a, b] of after) {
-      if (!dist.has(key(a, b))) continue;
-      const cheat = 2 + dist.get(key(a, b));
+      if (!dists.has(key(a, b))) continue;
+      const real = dists.get(key(a, b));
       if (cheat < real) {
         if (real - cheat >= 100) {
           answer++;

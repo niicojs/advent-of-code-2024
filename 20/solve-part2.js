@@ -35,29 +35,22 @@ for (const { x, y, cell } of enumGrid(grid)) {
 }
 
 function initdists() {
-  const dists = new Map();
-  const todo = [{ pos: start, dist: 0 }];
-
-  while (todo.length > 0) {
-    const { pos, dist } = todo.shift();
-    let [x, y] = pos;
-
-    if (dists.has(key(x, y))) continue;
-    dists.set(key(x, y), dist);
-
-    if (grid[y][x] === 'E') return dists;
-
-    const possible = getDirectNeighbors(x, y).filter(
-      ([nx, ny]) => inGridRange(grid, nx, ny) && grid[ny][nx] !== '#'
+  let d = 0;
+  const dists = new Map([[key(...start), 0]]);
+  let last = [-1, -1];
+  let [x, y] = start;
+  while (grid[y][x] !== 'E') {
+    const neighbors = getDirectNeighbors(x, y).filter(
+      ([nx, ny]) =>
+        inGridRange(grid, nx, ny) &&
+        grid[ny][nx] !== '#' &&
+        (nx !== last[0] || ny !== last[1])
     );
-
-    for (const [nx, ny] of possible) {
-      todo.push({
-        pos: [nx, ny],
-        dist: dist + 1,
-      });
-    }
+    last = [x, y];
+    [x, y] = neighbors[0];
+    dists.set(key(x, y), ++d);
   }
+  return dists;
 }
 
 const dists = initdists();
