@@ -86,7 +86,7 @@ export const printGrid = (grid, path = null) => {
   for (let y = 0; y < grid.length; y++) {
     let line = y.toString().padStart(pad, ' ') + ' │';
     for (let x = 0; x < grid[y].length; x++) {
-      if (path && inPath(path, [x, y])) line += yellow('o');
+      if (path && inPath(path, [x, y])) line += yellow(grid[y][x]);
       else line += grid[y][x];
     }
     line += '│';

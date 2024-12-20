@@ -21,6 +21,9 @@ consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
 const raw = getRawData().trim();
+const [one, two] = getRawData()
+  .trim()
+  .split(/\r?\n\r?\n/);
 const lines = getDataLines();
 const grid = getGrid(getDataLines());
 const values = getDataLines().map(nums);
