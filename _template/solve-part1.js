@@ -28,8 +28,10 @@ const lines = getDataLines();
 const grid = getGrid(getDataLines());
 const values = getDataLines().map(nums);
 
-const key = (x, y) => `${x},${y}`;
-const key2 = (x, y, dx, dy) => `${x},${y},${dx},${dy}`;
+const key = (x, y, x2, y2) => {
+  if (x2 && y2) return `${x},${y},${x2},${y2}`;
+  else return `${x},${y}`;
+};
 
 function search() {
   const todo = new TinyQueue(

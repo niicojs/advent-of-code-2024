@@ -1,6 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
-import { yellow } from 'yoctocolors';
+import { colors } from 'consola/utils';
 
 /**
  *
@@ -86,7 +86,7 @@ export const printGrid = (grid, path = null) => {
   for (let y = 0; y < grid.length; y++) {
     let line = y.toString().padStart(pad, ' ') + ' │';
     for (let x = 0; x < grid[y].length; x++) {
-      if (path && inPath(path, [x, y])) line += yellow(grid[y][x]);
+      if (path && inPath(path, [x, y])) line += colors.yellow(grid[y][x]);
       else line += grid[y][x];
     }
     line += '│';
@@ -293,4 +293,16 @@ export function solve2eq2inc([a1, b1, c1], [a2, b2, c2]) {
   const x = (b2 * c1 - b1 * c2) / (b2 * a1 - b1 * a2);
   const y = (c1 - a1 * x) / b1;
   return [x, y];
+}
+
+export function isPrime(n) {
+  if (isNaN(n) || !isFinite(n) || n % 1 || n < 2) return false;
+  if (n % 2 == 0) return n == 2;
+  if (n % 3 == 0) return n == 3;
+  var m = Math.sqrt(n);
+  for (var i = 5; i <= m; i += 6) {
+    if (n % i == 0) return false;
+    if (n % (i + 2) == 0) return false;
+  }
+  return true;
 }

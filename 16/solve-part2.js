@@ -1,7 +1,7 @@
 import { consola } from 'consola';
 import clipboard from 'clipboardy';
 import TinyQueue from 'tinyqueue';
-import { yellow } from 'yoctocolors';
+import { colors } from 'consola/utils';
 import {
   enumGrid,
   formatElapsedTime,
@@ -86,7 +86,7 @@ const printGrid = (grid, visited) => {
   for (let y = 0; y < grid.length; y++) {
     let line = y.toString().padStart(pad, ' ') + ' │';
     for (let x = 0; x < grid[y].length; x++) {
-      line += visited.has(`${x},${y}`) ? yellow('o') : grid[y][x];
+      line += visited.has(`${x},${y}`) ? colors.yellow('o') : grid[y][x];
     }
     line += '│';
     console.log(line);

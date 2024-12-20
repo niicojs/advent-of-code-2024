@@ -1,7 +1,6 @@
 import { consola } from 'consola';
 import clipboard from 'clipboardy';
 import TinyQueue from 'tinyqueue';
-import { yellow } from 'yoctocolors';
 import {
   formatElapsedTime,
   getCurrentDay,

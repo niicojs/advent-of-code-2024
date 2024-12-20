@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, writeFileSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { consola } from 'consola';
 
 export async function submit({ year, day, level, answer }) {
