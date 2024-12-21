@@ -63,9 +63,8 @@ function search() {
 let answer = 0;
 
 consola.success('result', answer);
-consola.success('Elapsed:', formatElapsedTime(begin - new Date().getTime()));
+consola.success('Done in', formatElapsedTime(begin - new Date().getTime()));
 if (process.argv[2] === 'real') {
   // await submit({ day, level: 1, answer: answer });
 }
-consola.success('Done.');
 clipboard.writeSync(answer?.toString());
