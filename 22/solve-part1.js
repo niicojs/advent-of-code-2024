@@ -22,12 +22,12 @@ const values = getDataLines().map(nums);
 const mix = (val, secret) => val ^ secret;
 const prune = (val) => mod(val, 16777216);
 
-const nextsecret = memoize((secret) => {
+const nextsecret = (secret) => {
   let val = prune(mix(secret * 64, secret));
   val = prune(mix(Math.floor(val / 32), val));
   val = prune(mix(val * 2048, val));
   return val;
-});
+};
 
 let answer = 0;
 for (let v of values) {

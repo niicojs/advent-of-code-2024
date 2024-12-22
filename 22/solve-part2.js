@@ -23,12 +23,12 @@ const values = getDataLines().map(nums);
 const mix = (val, secret) => val ^ secret;
 const prune = (val) => mod(val, 16777216);
 
-const nextsecret = memoize((secret) => {
+const nextsecret = (secret) => {
   let val = prune(mix(secret * 64, secret));
   val = prune(mix(Math.floor(val / 32), val));
   val = prune(mix(val * 2048, val));
   return val;
-});
+};
 
 const key = (a, b, c, d) => `${a},${b},${c},${d}`;
 
@@ -45,9 +45,7 @@ for (let [buyers, v] of values.entries()) {
     rolling.shift();
     if (i > 3) {
       const k = key(...rolling);
-      if (!changes.has(k)) {
-        changes.set(k, Array(values.length).fill(null));
-      }
+      if (!changes.has(k)) changes.set(k, Array(values.length).fill(null));
       const r = changes.get(k);
       if (r[buyers] === null) r[buyers] = p;
     }
@@ -56,10 +54,8 @@ for (let [buyers, v] of values.entries()) {
 
 let answer = 0;
 for (const vals of changes.values()) {
-  const gain = sum(vals.map((v) => v || 0));
-  if (gain > answer) {
-    answer = gain;
-  }
+  const gain = vals.reduce((acc, c) => acc + (c || 0), 0);
+  if (gain > answer) answer = gain;
 }
 
 consola.success('result', answer);
