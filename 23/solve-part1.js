@@ -15,9 +15,9 @@ const begin = new Date().getTime();
 
 const possible = [];
 const connections = new Map();
-const lines = getDataLines();
-for (const line of lines) {
-  const [from, to] = line.split('-');
+const edges = getDataLines();
+for (const edge of edges) {
+  const [from, to] = edge.split('-');
   if (!connections.has(from)) connections.set(from, []);
   if (!connections.has(to)) connections.set(to, []);
   connections.get(from).push(to);

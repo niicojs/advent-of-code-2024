@@ -10,11 +10,11 @@ const day = getCurrentDay();
 consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
-const lines = getDataLines();
+const edges = getDataLines();
 const all = new Set();
 const connections = new Map();
-for (const line of lines) {
-  const [from, to] = line.split('-');
+for (const edge of edges) {
+  const [from, to] = edge.split('-');
   if (!connections.has(from)) connections.set(from, []);
   if (!connections.has(to)) connections.set(to, []);
   connections.get(from).push(to);
