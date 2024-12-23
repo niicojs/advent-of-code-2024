@@ -10,7 +10,7 @@ const day = getCurrentDay();
 consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
-const possible = [];
+const all = new Set();
 const connections = new Map();
 const edges = getDataLines();
 for (const edge of edges) {
@@ -19,37 +19,33 @@ for (const edge of edges) {
   if (!connections.has(to)) connections.set(to, new Set());
   connections.get(from).add(to);
   connections.get(to).add(from);
-  if (from.at(0) === 't') possible.push(from);
-  if (to.at(0) === 't') possible.push(to);
+  all.add(from);
+  all.add(to);
 }
 
 const key = (g) => [...g].sort().join(',');
 
-function search(start) {
-  const todo = [[start, new Set([start])]];
-  const visited = new Set();
-  let best = new Set();
-  while (todo.length) {
-    const [node, graph] = todo.shift();
-    if (visited.has(key(graph))) continue;
-    visited.add(key(graph));
-    for (const next of connections.get(node)) {
-      if (node === graph || graph.has(next)) continue;
-      let ok = true;
-      for (const n of graph) {
-        if (!connections.get(n).has(next)) ok = false;
-      }
-      if (ok) todo.push([next, new Set([...graph, next])]);
-    }
-    if (graph.size > best.size) best = graph;
+function search(start, graph = new Set([start]), done = new Set()) {
+  let best = graph;
+  for (const next of connections.get(start)) {
+    if (graph.has(next)) continue;
+    if (done.has(next)) continue;
+    done.add(next);
+    if (!Array.from(graph.values()).every((v) => connections.get(v).has(next)))
+      continue;
+
+    const g = search(next, new Set([...graph, next]), done);
+    if (g.size > best.size) best = g;
   }
   return best;
 }
 
 let best = new Set();
-for (const node of possible) {
-  const g = search(node);
-  if (g.size > best.size) best = g;
+for (const node of all) {
+  if (!best.has(node)) {
+    const g = search(node);
+    if (g.size > best.size) best = g;
+  }
 }
 let answer = key(best);
 

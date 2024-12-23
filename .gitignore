@@ -3,4 +3,5 @@
 log.json
 incorrect.json
 debug*.*
-real.txt
+*.txt
+!input.txt
