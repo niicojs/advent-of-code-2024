@@ -73,7 +73,7 @@ while (i <= wide * tall) {
   const safe = product(split());
   if (safe < minsafe) {
     minsafe = safe;
-    print();
+    // print();
     best = i;
   }
   i++;

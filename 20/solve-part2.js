@@ -22,7 +22,7 @@ const begin = new Date().getTime();
 const grid = getGrid(getDataLines());
 
 const key = (x, y, x2, y2) => {
-  if (x2 && y2) return `${x},${y},${x2},${y2}`;
+  if (x2 !== undefined && y2 !== undefined) return `${x},${y},${x2},${y2}`;
   else return `${x},${y}`;
 };
 

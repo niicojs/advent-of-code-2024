@@ -1,5 +1,11 @@
 import { consola } from 'consola';
-import { formatElapsedTime, getCurrentDay, getRawData, sum } from '../utils.js';
+import {
+  formatElapsedTime,
+  getCurrentDay,
+  getRawData,
+  nums,
+  sum,
+} from '../utils.js';
 import { submit } from '../aoc.js';
 
 consola.wrapAll();
@@ -9,7 +15,7 @@ const day = getCurrentDay();
 consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
-let numbers = getRawData().trim().split(/\s+/);
+let numbers = nums(getRawData());
 let map = {};
 for (let i = 0; i < numbers.length; i++) {
   map[numbers[i]] = 1 + (map[numbers[i]] || 0);

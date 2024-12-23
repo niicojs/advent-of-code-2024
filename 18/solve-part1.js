@@ -8,6 +8,7 @@ import {
   getDirectNeighbors,
   inGridRange,
   inPath,
+  nums,
   printGrid,
 } from '../utils.js';
 import { submit } from '../aoc.js';
@@ -19,7 +20,7 @@ const day = getCurrentDay();
 consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
-const lines = getDataLines().map((l) => l.split(',').map(Number));
+const lines = getDataLines().map(nums);
 
 const SIZE = process.argv[2] === 'real' ? 71 : 7;
 const grid = Array(SIZE)

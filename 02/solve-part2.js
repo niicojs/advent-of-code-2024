@@ -3,6 +3,7 @@ import {
   formatElapsedTime,
   getCurrentDay,
   getDataLines,
+  nums,
 } from '../utils.js';
 import { submit } from '../aoc.js';
 
@@ -13,7 +14,7 @@ const day = getCurrentDay();
 consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
-const reports = getDataLines().map((l) => l.split(/\s+/).map(Number));
+const reports = getDataLines().map(nums);
 
 function safe(report, strict = false) {
   if (report[0] === report[1]) {
@@ -50,5 +51,5 @@ for (let i = 0; i < reports.length; i++) {
 
 consola.success('result', answer);
 consola.success('Elapsed:', formatElapsedTime(begin - new Date().getTime()));
-await submit({ day, level: 2, answer });
+// await submit({ day, level: 2, answer });
 consola.success('Done.');

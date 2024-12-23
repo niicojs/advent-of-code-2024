@@ -16,10 +16,7 @@ const all = data.matchAll(/(mul\((\d+)\,(\d+)\))|(do\(\))|(don\'t\(\))/g);
 for (const m of all) {
   if (m[0] === 'do()') ok = true;
   else if (m[0] === "don't()") ok = false;
-  else if (ok) {
-    console.log(m[2], m[3]);
-    answer += +m[2] * +m[3];
-  }
+  else if (ok) answer += +m[2] * +m[3];
 }
 
 consola.success('result', answer);

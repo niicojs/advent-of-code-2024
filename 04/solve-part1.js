@@ -34,7 +34,6 @@ let answer = 0;
 const grid = getGrid(getDataLines());
 for (const { x, y, cell } of enumGrid(grid)) {
   if (cell === 'X') {
-    console.log(`[${x},${y}]`, find(x, y, neighbors, 'MAS'));
     answer += find(x, y, neighbors, 'MAS');
   }
 }

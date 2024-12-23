@@ -3,6 +3,7 @@ import {
   formatElapsedTime,
   getCurrentDay,
   getDataLines,
+  nums,
   product,
 } from '../utils.js';
 import { submit } from '../aoc.js';
@@ -14,6 +15,8 @@ const day = getCurrentDay();
 consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
+const lines = getDataLines().map(nums);
+
 let tall = 7;
 let wide = 11;
 if (process.argv[2] === 'real') {
@@ -22,7 +25,6 @@ if (process.argv[2] === 'real') {
 }
 
 const robots = [];
-const lines = getDataLines().map((l) => l.match(/(-?\d+)/g).map(Number));
 
 for (const [x, y, dx, dy] of lines) {
   robots.push({ pos: [x, y], speed: [dx, dy] });

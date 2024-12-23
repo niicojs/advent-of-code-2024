@@ -1,5 +1,10 @@
 import { consola } from 'consola';
-import { formatElapsedTime, getCurrentDay, getDataLines } from '../utils.js';
+import {
+  formatElapsedTime,
+  getCurrentDay,
+  getDataLines,
+  nums,
+} from '../utils.js';
 
 consola.wrapAll();
 
@@ -8,7 +13,7 @@ const day = getCurrentDay();
 consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
-const lines = getDataLines().map((l) => l.split(/\s+/).map(Number));
+const lines = getDataLines().map(nums);
 
 const left = lines.map((l) => l[0]);
 const right = lines.map((l) => l[1]);

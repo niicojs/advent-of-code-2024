@@ -13,7 +13,6 @@ const data = getRawData();
 let answer = 0;
 const all = data.matchAll(/mul\((\d+)\,(\d+)\)/g);
 for (const m of all) {
-  console.log(m[1], m[2]);
   answer += +m[1] * +m[2];
 }
 

@@ -4,6 +4,7 @@ import {
   getCurrentDay,
   getRawData,
   memoize,
+  nums,
 } from '../utils.js';
 import { submit } from '../aoc.js';
 
@@ -14,7 +15,7 @@ const day = getCurrentDay();
 consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
-let numbers = getRawData().trim().split(/\s+/).map(Number);
+let numbers = nums(getRawData());
 
 let answer = 0;
 

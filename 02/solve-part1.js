@@ -3,6 +3,7 @@ import {
   formatElapsedTime,
   getCurrentDay,
   getDataLines,
+  nums,
 } from '../utils.js';
 import { submit } from '../aoc.js';
 
@@ -13,7 +14,7 @@ const day = getCurrentDay();
 consola.start('Starting day ' + day);
 const begin = new Date().getTime();
 
-const reports = getDataLines().map((l) => l.split(/\s+/).map(Number));
+const reports = getDataLines().map(nums);
 
 function safe(report) {
   const incr = report.at(0) < report.at(1);
