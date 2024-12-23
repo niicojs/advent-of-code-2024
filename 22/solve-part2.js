@@ -20,13 +20,10 @@ const begin = new Date().getTime();
 
 const values = getDataLines().map(nums);
 
-const mix = (val, secret) => val ^ secret;
-const prune = (val) => mod(val, 16777216);
-
 const nextsecret = (secret) => {
-  let val = prune(mix(secret * 64, secret));
-  val = prune(mix(Math.floor(val / 32), val));
-  val = prune(mix(val * 2048, val));
+  let val = mod((secret * 64) ^ secret, 16777216);
+  val = mod(Math.floor(val / 32) ^ val, 16777216);
+  val = mod((val * 2048) ^ val, 16777216);
   return val;
 };
 
