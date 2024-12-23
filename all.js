@@ -20,7 +20,7 @@ const begin = new Date().getTime();
 for (let i = 1; i <= 25; i++) {
   if (puzzles[i]) {
     count++;
-    puzzles[i].part1(data[i]);
+    // puzzles[i].part1(data[i]);
     puzzles[i].part2(data[i]);
   }
 }
