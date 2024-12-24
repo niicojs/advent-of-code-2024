@@ -1,7 +1,6 @@
 import { consola } from 'consola';
 import clipboard from 'clipboardy';
 import { formatElapsedTime, getCurrentDay, getRawData } from '../utils.js';
-import { submit } from '../aoc.js';
 
 consola.wrapAll();
 
@@ -138,11 +137,14 @@ for (const z of output) {
   while (inputs.has('x' + idx) && idx !== '45') {
     if (!done.has('z' + idx)) {
       const x = find('XOR', 'x' + idx);
-      // const y = find('XOR', 'y' + idx);
       const toz = gates.get('z' + idx);
-      const good = gates.get(toz[1])[2].startsWith('z') ? toz[1] : toz[2];
-      if (x !== toz[1] && x !== toz[2]) {
-        consola.log(`should be input XOR node XOR output`);
+      const good =
+        gates.get(toz[1])[2].startsWith('x' + idx) ||
+        gates.get(toz[1])[1].startsWith('x' + idx)
+          ? toz[1]
+          : toz[2];
+      if (x !== good) {
+        consola.log(`z${idx} not a good pattern input XOR node XOR output`);
         consola.log(`  should swap ${x} and ${good}`);
         swap[x] = good;
         swap[good] = x;
@@ -152,32 +154,13 @@ for (const z of output) {
   }
 }
 
-// for (const [i, g] of output.entries()) {
-//   if (g.endsWith('45')) continue;
-//   const d = Array.from(depends(g)).filter(
-//     (i) => i.startsWith('x') || i.startsWith('y')
-//   );
-//   let missing = [];
-//   for (let x = 0; x <= i; x++) {
-//     if (!d.includes('x' + x.toString().padStart(2, '0'))) {
-//       missing.push('x' + x.toString().padStart(2, '0'));
-//     }
-//     if (!d.includes('y' + x.toString().padStart(2, '0'))) {
-//       missing.push('y' + x.toString().padStart(2, '0'));
-//     }
-//   }
-//   if (missing.length > 0)
-//     consola.log('output not depending on all previous values', g, missing);
-// }
-
 consola.box('after');
 
 dostuff();
 
+// consola.log('swap', JSON.stringify(swap));
+
 let answer = Object.keys(swap).sort().join(',');
 consola.success('result', answer);
 consola.success('Done in', formatElapsedTime(begin - new Date().getTime()));
-if (process.argv[2] === 'real') {
-  // await submit({ day, level: 2, answer: answer });
-}
 clipboard.writeSync(answer?.toString());
