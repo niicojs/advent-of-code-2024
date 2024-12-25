@@ -1,4 +1,5 @@
 import { existsSync, readFileSync } from 'node:fs';
+import { hrtime } from 'node:process';
 import path from 'node:path';
 import { colors } from 'consola/utils';
 
@@ -214,6 +215,22 @@ export function manhattan([x1, y1], [x2, y2]) {
 export const inPath = (path, [x, y]) =>
   path.some(([i, j]) => i === x && j === y);
 
+export function timer() {
+  let begin = 0n;
+  const start = () => {
+    begin = hrtime.bigint();
+  };
+  const elapsed = () => {
+    return hrtime.bigint() - begin;
+  };
+  const format = () => {
+    const nano = elapsed();
+    return formatElapsedTime(Number(nano / 1_000_000n));
+  };
+  start();
+  return { start, elapsed, format };
+}
+
 export const formatElapsedTime = (elapsed) => {
   const diff = Math.abs(elapsed);
 
@@ -229,7 +246,7 @@ export const formatElapsedTime = (elapsed) => {
     result += `${seconds.toString().padStart(2, 0)}s `;
   }
 
-  return result + `${milliseconds.toString().padEnd(3, 0)}ms`;
+  return result + `${milliseconds.toString()}ms`;
 };
 
 export const lacet = (path) => {

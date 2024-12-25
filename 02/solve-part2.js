@@ -1,18 +1,11 @@
 import { consola } from 'consola';
-import {
-  formatElapsedTime,
-  getCurrentDay,
-  getDataLines,
-  nums,
-} from '../utils.js';
-import { submit } from '../aoc.js';
+import { getCurrentDay, getDataLines, nums, timer } from '../utils.js';
 
 consola.wrapAll();
 
 const day = getCurrentDay();
-
 consola.start('Starting day ' + day);
-const begin = new Date().getTime();
+const t = timer();
 
 const reports = getDataLines().map(nums);
 
@@ -50,6 +43,4 @@ for (let i = 0; i < reports.length; i++) {
 }
 
 consola.success('result', answer);
-consola.success('Elapsed:', formatElapsedTime(begin - new Date().getTime()));
-// await submit({ day, level: 2, answer });
-consola.success('Done.');
+consola.success('Done in', t.format());

@@ -1,19 +1,17 @@
 import { consola } from 'consola';
 import clipboard from 'clipboardy';
 import {
-  formatElapsedTime,
   getCurrentDay,
   getRawData,
   memoize,
+  timer,
 } from '../utils.js';
-import { submit } from '../aoc.js';
 
 consola.wrapAll();
 
 const day = getCurrentDay();
-
 consola.start('Starting day ' + day);
-const begin = new Date().getTime();
+const t = timer();
 
 const [one, two] = getRawData()
   .trim()
@@ -50,8 +48,5 @@ let answer = 0;
 for (const g of output) answer = answer * 2 + getval(g);
 
 consola.success('result', answer);
-consola.success('Done in', formatElapsedTime(begin - new Date().getTime()));
-if (process.argv[2] === 'real') {
-  // await submit({ day, level: 1, answer: answer });
-}
+consola.success('Done in', t.format());
 clipboard.writeSync(answer?.toString());

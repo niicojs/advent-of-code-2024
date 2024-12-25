@@ -1,18 +1,12 @@
 import { consola } from 'consola';
 import clipboard from 'clipboardy';
-import {
-  formatElapsedTime,
-  getCurrentDay,
-  getGrid,
-  getRawData,
-} from '../utils.js';
+import { getCurrentDay, getGrid, getRawData, timer } from '../utils.js';
 
 consola.wrapAll();
 
 const day = getCurrentDay();
-
 consola.start('Starting day ' + day);
-const begin = new Date().getTime();
+const t = timer();
 
 const locks = [];
 const keys = [];
@@ -53,5 +47,5 @@ for (const lock of locks) {
 }
 
 consola.success('result', answer);
-consola.success('Done in', formatElapsedTime(begin - new Date().getTime()));
+consola.success('Done in', t.format());
 clipboard.writeSync(answer?.toString());
