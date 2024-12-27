@@ -1,4 +1,5 @@
 import { existsSync, readFileSync } from 'node:fs';
+import { hrtime } from 'node:process';
 import path from 'node:path';
 import { colors } from 'consola/utils';
 
@@ -54,6 +55,12 @@ export function getDataLines(removeBlank = true) {
  */
 export function getGrid(lines) {
   return lines.map((l) => l.split(''));
+}
+
+export function newGrid(h, w, value) {
+  return Array(h)
+    .fill(0)
+    .map(() => Array(w).fill(value));
 }
 
 /**
@@ -152,6 +159,16 @@ export function getDirectNeighbors(x, y) {
   return directNeighbors.map(([dx, dy]) => [x + dx, y + dy]);
 }
 
+/**
+ * Returns all neighbors of (x, y)
+ * @param {number} x
+ * @param {number} y
+ * @returns {[number, number][]}
+ */
+export function getNeighbors(x, y) {
+  return neighbors.map(([dx, dy]) => [x + dx, y + dy]);
+}
+
 export function chunk(arr, len) {
   arr = [...arr];
   return [...Array(Math.ceil(arr.length / len))].map((_, i) =>
@@ -214,6 +231,22 @@ export function manhattan([x1, y1], [x2, y2]) {
 export const inPath = (path, [x, y]) =>
   path.some(([i, j]) => i === x && j === y);
 
+export function timer() {
+  let begin = 0n;
+  const start = () => {
+    begin = hrtime.bigint();
+  };
+  const elapsed = () => {
+    return hrtime.bigint() - begin;
+  };
+  const format = () => {
+    const nano = elapsed();
+    return formatElapsedTime(Number(nano / 1_000_000n));
+  };
+  start();
+  return { start, elapsed, format };
+}
+
 export const formatElapsedTime = (elapsed) => {
   const diff = Math.abs(elapsed);
 
@@ -229,7 +262,7 @@ export const formatElapsedTime = (elapsed) => {
     result += `${seconds.toString().padStart(2, 0)}s `;
   }
 
-  return result + `${milliseconds.toString().padEnd(3, 0)}ms`;
+  return result + `${milliseconds.toString()}ms`;
 };
 
 export const lacet = (path) => {
@@ -306,3 +339,8 @@ export function isPrime(n) {
   }
   return true;
 }
+
+export const count = (arr, value) => {
+  if (typeof arr === 'string') arr = arr.split('');
+  return arr.filter((v) => v === value).length;
+};

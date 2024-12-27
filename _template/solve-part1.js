@@ -2,7 +2,6 @@ import { consola } from 'consola';
 import clipboard from 'clipboardy';
 import TinyQueue from 'tinyqueue';
 import {
-  formatElapsedTime,
   getCurrentDay,
   getDataLines,
   getDirectNeighbors,
@@ -10,15 +9,15 @@ import {
   getRawData,
   inGridRange,
   nums,
+  timer,
 } from '../utils.js';
 import { submit } from '../aoc.js';
 
 consola.wrapAll();
 
 const day = getCurrentDay();
-
 consola.start('Starting day ' + day);
-const begin = new Date().getTime();
+const t = timer();
 
 const raw = getRawData().trim();
 const [one, two] = getRawData()
@@ -63,7 +62,7 @@ function search() {
 let answer = 0;
 
 consola.success('result', answer);
-consola.success('Done in', formatElapsedTime(begin - new Date().getTime()));
+consola.success('Done in', t.format());
 if (process.argv[2] === 'real') {
   // await submit({ day, level: 1, answer: answer });
 }

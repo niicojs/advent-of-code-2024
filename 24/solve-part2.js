@@ -1,13 +1,12 @@
 import { consola } from 'consola';
 import clipboard from 'clipboardy';
-import { formatElapsedTime, getCurrentDay, getRawData } from '../utils.js';
+import { getCurrentDay, getRawData, timer } from '../utils.js';
 
 consola.wrapAll();
 
 const day = getCurrentDay();
-
 consola.start('Starting day ' + day);
-const begin = new Date().getTime();
+const t = timer();
 
 const [one, two] = getRawData()
   .trim()
@@ -162,5 +161,5 @@ dostuff();
 
 let answer = Object.keys(swap).sort().join(',');
 consola.success('result', answer);
-consola.success('Done in', formatElapsedTime(begin - new Date().getTime()));
+consola.success('Done in', t.format());
 clipboard.writeSync(answer?.toString());

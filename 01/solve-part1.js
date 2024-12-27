@@ -1,17 +1,12 @@
 import { consola } from 'consola';
-import {
-  formatElapsedTime,
-  getCurrentDay,
-  getDataLines,
-  nums,
-} from '../utils.js';
+import { getCurrentDay, getDataLines, nums, timer } from '../utils.js';
 
 consola.wrapAll();
 
 const day = getCurrentDay();
 
 consola.start('Starting day ' + day);
-const begin = new Date().getTime();
+const t = timer();
 
 const lines = getDataLines().map(nums);
 
@@ -24,5 +19,4 @@ for (let i = 0; i < left.length; i++) {
 }
 
 consola.success('result', answer);
-consola.success('Elapsed:', formatElapsedTime(begin - new Date().getTime()));
-consola.success('Done.');
+consola.success('Done in', t.format());
