@@ -57,6 +57,12 @@ export function getGrid(lines) {
   return lines.map((l) => l.split(''));
 }
 
+export function newGrid(h, w, value) {
+  return Array(h)
+    .fill(0)
+    .map(() => Array(w).fill(value));
+}
+
 /**
  * Extracts all integer numbers from a given string and returns them as an array of numbers.
  *
@@ -151,6 +157,16 @@ export const neighbors = [...diagNeighbors, ...directNeighbors];
  */
 export function getDirectNeighbors(x, y) {
   return directNeighbors.map(([dx, dy]) => [x + dx, y + dy]);
+}
+
+/**
+ * Returns all neighbors of (x, y)
+ * @param {number} x
+ * @param {number} y
+ * @returns {[number, number][]}
+ */
+export function getNeighbors(x, y) {
+  return neighbors.map(([dx, dy]) => [x + dx, y + dy]);
 }
 
 export function chunk(arr, len) {
@@ -323,3 +339,8 @@ export function isPrime(n) {
   }
   return true;
 }
+
+export const count = (arr, value) => {
+  if (typeof arr === 'string') arr = arr.split('');
+  return arr.filter((v) => v === value).length;
+};
