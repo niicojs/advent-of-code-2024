@@ -243,8 +243,13 @@ export function timer() {
     const nano = elapsed();
     return formatElapsedTime(Number(nano / 1_000_000n));
   };
+  const timefunc = (func) => {
+    start();
+    func();
+    return format();
+  };
   start();
-  return { start, elapsed, format };
+  return { start, elapsed, format, timefunc };
 }
 
 export const formatElapsedTime = (elapsed) => {
