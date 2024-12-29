@@ -2,27 +2,25 @@ import { consola } from 'consola';
 import clipboard from 'clipboardy';
 import {
   enumGrid,
-  formatElapsedTime,
   getCurrentDay,
   getDataLines,
   getDirectNeighbors,
   getGrid,
   inGridRange,
   nums,
+  timer,
 } from '../utils.js';
-import { submit } from '../aoc.js';
 
 consola.wrapAll();
 
 const day = getCurrentDay();
-
 consola.start('Starting day ' + day);
-const begin = new Date().getTime();
+const t = timer();
 
 const grid = getGrid(getDataLines());
 
 const key = (x, y, x2, y2) => {
-  if (x2 !== undefined && y2 !== undefined) return `${x},${y},${x2},${y2}`;
+  if (x2 !== undefined) return `${x},${y},${x2},${y2}`;
   else return `${x},${y}`;
 };
 
@@ -87,9 +85,5 @@ for (const k of dists.keys()) {
 const answer = Object.values(cheats).filter((v) => v >= 100).length;
 
 consola.success('result', answer);
-consola.success('Elapsed:', formatElapsedTime(begin - new Date().getTime()));
-if (process.argv[2] === 'real') {
-  // await submit({ day, level: 2, answer: answer });
-}
-consola.success('Done.');
+consola.success('Done in', t.format());
 clipboard.writeSync(answer?.toString());

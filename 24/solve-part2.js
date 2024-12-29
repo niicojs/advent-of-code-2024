@@ -102,17 +102,14 @@ function fixOutputXOR(z) {
 function dostuff() {
   const incorrects = [];
   let expected = BigInt(x) + BigInt(y);
-  let answer = 0n;
   for (const g of output) {
     const v = getval(g);
     if ((expected & 1n) !== BigInt(v)) {
       incorrects.push(g);
     }
     expected = expected >> 1n;
-    answer = answer * 2n + BigInt(v);
   }
 
-  consola.log({ correct, answer });
   consola.log('total incorrects', incorrects.length);
   consola.log(JSON.stringify(incorrects));
 }

@@ -7,6 +7,7 @@ import {
   getGrid,
   inGridRange,
   inPath,
+  timer,
 } from '../utils.js';
 
 consola.wrapAll();
@@ -14,13 +15,16 @@ consola.wrapAll();
 const day = getCurrentDay();
 
 consola.start('Starting day ' + day);
-const begin = new Date().getTime();
+const t = timer();
 
 let start = [0, 0];
 
 const grid = getGrid(getDataLines());
 for (const { x, y, cell } of enumGrid(grid)) {
-  if (cell === '^') start = [x, y];
+  if (cell === '^') {
+    start = [x, y];
+    break;
+  }
 }
 
 const key = (pos, dir) => `${pos[0]},${pos[1]},${dir[0]},${dir[1]}`;
@@ -69,5 +73,4 @@ for (const [x, y] of path) {
 }
 
 consola.success('result', answer);
-consola.success('Elapsed:', formatElapsedTime(begin - new Date().getTime()));
-consola.success('Done.');
+consola.success('done in', t.format());
